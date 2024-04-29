@@ -22,8 +22,8 @@
         <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf -model robot_model -param robot_description"/>
     <!-- Cartographer SLAM -->
-    <include file="$(find testing_cartographer)/launch/summit.launch">
     
-    </include>
+    <!--include file="$(find testing_cartographer)/launch/summit.launch">
+    </include-->
 
 </launch>

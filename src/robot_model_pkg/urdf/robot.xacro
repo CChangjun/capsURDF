@@ -7,11 +7,11 @@
 <!-- wheel dimensions-->
 <xacro:property name="wheel_link_radius" value="0.06"/>
 <xacro:property name="wheel_link_length" value="0.025"/>
-<xacro:property name="wheel_link_z_location" value="-0.13"/>
+<xacro:property name="wheel_link_z_location" value="-0.07"/>
 
 <!--Material density-->
-<xacro:property name="body_density" value="2710.0"/>
-<xacro:property name="wheel_density" value="2710.0"/>
+<xacro:property name="body_density" value="27100.0"/><!--여기바꿈0추가-->
+<xacro:property name="wheel_density" value="27100.0"/>
 
 <!-- PI constant-->
 <xacro:property name="pi_const" value="3.14159265"/>
@@ -28,11 +28,17 @@
 <material name="blue">
     <color rgba = "0 0 0.8 1"/>
   </material>
+
   <material name="gray">
     <color rgba = "1 1 1 1"/>
   </material>
+
   <material name="blueviolet">
     <color rgba = "0.54 0.16 0.88 1"/>
+  </material>
+
+  <material name="changF">
+    <color rgba = "0.7 0 0.5 1"/>
   </material>
 
 <!-- This macro defines the complete inertial section of the wheel-->
@@ -112,6 +118,7 @@
                 <geometry>
                         <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}"/>
                 </geometry>
+                 <material name = "changF"/>
         </visual>
 
         <collision>
@@ -150,6 +157,7 @@
                 <geometry>
                         <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}"/>
                 </geometry>
+                <material name = "changF"/>
         </visual>
 
         <collision>
@@ -184,6 +192,7 @@
                 <geometry>
                         <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}"/>
                 </geometry>
+                <material name = "changF"/>
         </visual>
         <collision>
                 <origin rpy="1.570795 0 0" xyz="0 0 0" />
@@ -218,6 +227,7 @@
                 <geometry>
                         <cylinder length="${wheel_link_length}" radius="${wheel_link_radius}"/>
                 </geometry>
+                <material name = "changF"/>
         </visual>
         <collision>
                 <origin rpy="1.570795 0 0" xyz="0 0 0" />
@@ -229,7 +239,7 @@
 </link>
 
   <joint name = "head_scanner" type = "fixed">
-    <origin xyz = "0 0 0.15" rpy = "0 0 0"/>
+    <origin xyz = "0 0 0.07" rpy = "0 0 0"/>
     <parent link = "base_link"/>
     <child link = "base_scan"/>
   </joint>
@@ -244,9 +254,9 @@
       <material name = "blueviolet"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0.4" rpy = "0 0 1.570795"/>
+      <origin xyz="0 0 0.05" rpy = "0 0 1.570795"/>
       <geometry>
-        <cylinder length="0.09" radius="0.09"/>
+        <cylinder length="0.1" radius="0.09"/>
       </geometry>
     </collision>
   </link>

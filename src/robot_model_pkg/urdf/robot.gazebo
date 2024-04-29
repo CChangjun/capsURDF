@@ -35,11 +35,6 @@
 <material>Gazebo/Yellow</material>
 </gazebo>
 
-<gazebo reference="base_scan">
-<mu1>0.2</mu1>
-<mu2>0.2</mu2>
-<material>Gazebo/Red</material>
-</gazebo>
 
 
 <!-- ########################################## -->
@@ -56,6 +51,8 @@
         <rightFrontJoint>wheel3_joint</rightFrontJoint>
         <leftRearJoint>wheel2_joint</leftRearJoint>
         <rightRearJoint>wheel1_joint</rightRearJoint>
+        
+        
         <wheelSeparation>${body_link_y_dim+wheel_link_length}</wheelSeparation>
         <wheelDiameter>${wheel_link_radius}</wheelDiameter>
 
@@ -65,43 +62,56 @@
         <!-- Topic to receive geometry_msgs/Twist message commands, defaults to 'cmd_vel'-->
         <!--commandTopic>cmd_vel</commandTopic-->
         <!-- Topic to publish nav_msgs/Odometry messages, defaults to 'odom' -->
-        <!--odometryTopic>odom</odometryTopic-->
+        <odometryTopic>odom</odometryTopic>
         <!-- Odometry frame, defaults to 'odom' -->
-        <!--odometryFrame>odom</odometryFrame-->
+        <odometryFrame>odom</odometryFrame>
         <!-- Robot frame to calculate odometry from, defaults to 'base_footprint' -->
-        <!--robotBaseFrame>dummy</robotBaseFrame-->
-        <!-- Set to true to publish transforms for the wheel links, defaults to false -->
-        <!--publishWheelTF>true</publishWheelTF-->
+        <robotBaseFrame>base_link</robotBaseFrame> <!--footprint로 해보기-->
+        <!-- Set to true to publish transforms for the wheel links, defaults to false -->.
+        
+        <publishWheelTF>false</publishWheelTF>
         <!-- Set to true to publish transforms for the odometry, defaults to true -->
-        <!--publishOdom>true</-->
+        <publishOdom>false</publishOdom>
         <!-- Set to true to publish sensor_msgs/JointState on / joint_states for the wheel joints, defaults to false -->
-        <!--publishWheelJointState>true</publishWheelJointState-->
+        <publishWheelJointState>false</publishWheelJointState>
         <!--publishTf>true</publishTf-->
         <!--publishOdomTF>true</publishOdomTF-->
         <!-- This part is required by Gazebo -->
-        <!--covariance_x>0.0001</covariance_x-->
-        <!--covariance_y>0.0001</covariance_y-->
-        <!--covariance_yaw>0.01</covariance_yaw-->
+        <covariance_x>0.0001</covariance_x>
+        <covariance_y>0.0001</covariance_y>
+        <covariance_yaw>0.01</covariance_yaw>
         <!--broadcastTF>true</broadcastTF-->
 
 
         </plugin>
     </gazebo>
-<gazebo>      
-<plugin name='mrs_gazebo_2dlidar' filename='libMRSGazebo2DLidarPlugin.so'>
-      <topicName>scan</topicName>
-      <frameName>base_scan</frameName>
-      <parentFrameName>base_link</parentFrameName><!--dummy였음 0413-->
-      <x>0</x>
-      <y>0</y>
-      <z>0.05</z>
-      <roll>0</roll>
-      <pitch>0</pitch>
-      <yaw>1.570795</yaw>
-      </plugin>     
+<gazebo reference="base_scan">
+        <material>Gazebo/Red</material>
+        <sensor name="laser" type="ray">
+            <pose>0 0 0.05 0 0 1.570795</pose>
+            <visualize>true</visualize>
+            <update_rate>10</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.3</min>
+                    <max>12</max>   
+                </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <argument>~/out:=scan</argument>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>base_scan</frame_name>
 
-
-        
+            </plugin>
+        </sensor>
     </gazebo>
-
 </robot>
