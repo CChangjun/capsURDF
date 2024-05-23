@@ -2,7 +2,7 @@
     
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="paused" value="false" />
-        <arg name="use_sim_time" value="true" />
+        <arg name="use_sim_time" value="false" />
         <arg name="gui" value="true" />
         <arg name="headless" value="false" />
         <arg name="debug" value="false" />
@@ -12,9 +12,9 @@
         command="$(find xacro)/xacro '$(find robot_model_pkg)/urdf/robot.xacro'"/>
         
 <!-- Robot state publisher node -->
-        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
         <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-        <!--node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/-->
+        
         <node name="rviz" pkg="rviz" type="rviz"
         args="-d $(find robot_model_pkg)/robot.rviz" required="true"/>
 

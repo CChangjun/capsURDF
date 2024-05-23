@@ -1,8 +1,11 @@
 <robot name="differential_drive_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 <!-- body dimensions-->
-<xacro:property name="body_link_x_dim" value="0.397"/><!--1-->
-<xacro:property name="body_link_y_dim" value="0.320"/><!--0.6-->
-<xacro:property name="body_link_z_dim" value="0.156"/><!--0.3-->
+
+<!--caps -->
+
+<xacro:property name="body_link_x_dim" value="0.45"/><!--1-->
+<xacro:property name="body_link_y_dim" value="0.45"/><!--0.6-->
+<xacro:property name="body_link_z_dim" value="0."/><!--0.3-->
 
 <!-- wheel dimensions-->
 <xacro:property name="wheel_link_radius" value="0.06"/>
