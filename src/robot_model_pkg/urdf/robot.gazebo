@@ -3,39 +3,39 @@
 <gazebo reference="footprint">
 <mu1>0.2</mu1>
 <mu2>0.2</mu2>
-<material>Gazebo/Red</material>
+
 </gazebo>
 <gazebo reference="base_link">
 <mu1>0.2</mu1>
 <mu2>0.2</mu2>
-<material>Gazebo/Red</material>
 </gazebo>
 
 <gazebo reference="wheel1_link">
 <mu1>0.2</mu1>
 <mu2>0.2</mu2>
-<material>Gazebo/Yellow</material>
 </gazebo>
 
 <gazebo reference="wheel2_link">
 <mu1>0.2</mu1>
 <mu2>0.2</mu2>
-<material>Gazebo/Yellow</material>
 </gazebo>
 
-<gazebo reference="caster_wheel">
+<gazebo reference="connect2caster_joint_1">
 <mu1>0.2</mu1>
 <mu2>0.2</mu2>
-<material>Gazebo/Yellow</material>
 </gazebo>
 
 
+<gazebo reference="connect2caster_joint_2">
+<mu1>0.2</mu1>
+<mu2>0.2</mu2>
+</gazebo>
 
 <gazebo>
   <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
     <!-- Plugin update rate in Hz -->
-    <updateRate>100</updateRate>
+    <updateRate>33</updateRate>
 
     <!-- Name of left joint, defaults to `left_joint` -->
     <leftJoint>wheel2_joint</leftJoint>
@@ -43,20 +43,20 @@
     <!-- Name of right joint, defaults to `right_joint` -->
     <rightJoint>wheel1_joint</rightJoint>
 
+
     <!-- The distance from the center of one wheel to the other, in meters, defaults to 0.34 m -->
-    <wheelSeparation>0.345</wheelSeparation>
+    <wheelSeparation>0.45</wheelSeparation>
 
     <!-- Diameter(지름) of the wheels, in meters, defaults to 0.15 m -->
-    <wheelDiameter>0.12</wheelDiameter>
+    <wheelDiameter>0.34</wheelDiameter>
 
     <!-- Wheel acceleration, in rad/s^2, defaults to 0.0 rad/s^2 -->
-    <wheelAcceleration>1.0</wheelAcceleration>
 
     <!-- Maximum torque which the wheels can produce, in Nm, defaults to 5 Nm -->
-    <wheelTorque>2000</wheelTorque>
+    <wheelTorque>3000</wheelTorque>
 
     <!-- Topic to receive geometry_msgs/Twist message commands, defaults to `cmd_vel` -->
-    <commandTopic>/cmd_vel</commandTopic>
+    <commandTopic>cmd_vel</commandTopic>
 
     <!-- Topic to publish nav_msgs/Odometry messages, defaults to `odom` -->
     <odometryTopic>odom</odometryTopic>
@@ -74,10 +74,10 @@
     <publishWheelTF>false</publishWheelTF>
 
     <!-- Set to true to publish transforms for the odometry, defaults to true -->
-    <publishOdom>true</publishOdom>
-    <publishOdomTF>true</publishOdomTF>
+    <publishOdom>false</publishOdom>
+    <publishOdomTF>false</publishOdomTF>
     <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
-    <publishWheelJointState>true</publishWheelJointState>
+    <publishWheelJointState>false</publishWheelJointState>
     <covariance_x>0.0001</covariance_x>
     <covariance_y>0.0001</covariance_y>
     <covariance_yaw>0.01</covariance_yaw>
@@ -106,7 +106,7 @@
                     <max>12</max>   
                 </range>
             </ray>
-            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">true
                 <ros>
                     <argument>~/out:=scan</argument>
                 </ros>
